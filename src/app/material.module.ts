@@ -1,4 +1,9 @@
 import { NgModule } from '@angular/core';
-
-@NgModule({ imports: [], exports: [] })
+import {MatToolbarModule} from '@angular/material';
+import {MatCardModule} from '@angular/material/card';
+import {FlexLayoutModule} from '@angular/flex-layout';
+@NgModule({
+  imports: [MatToolbarModule , MatCardModule , FlexLayoutModule],
+  exports: [MatToolbarModule , MatCardModule , FlexLayoutModule]
+})
 export class MaterialModule {}
