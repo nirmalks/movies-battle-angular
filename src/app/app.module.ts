@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { MaterialModule } from './material.module';
 import { HeaderComponent } from './header/header.component';
 import { HomepageComponent } from './homepage/homepage.component';
+import { BattleComponent } from './battle/battle.component';
 import { RoutingModule } from './routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MoviesService } from './movies/movies.service';
@@ -13,7 +14,8 @@ import { MoviesService } from './movies/movies.service';
   declarations: [
     AppComponent,
     HeaderComponent,
-    HomepageComponent
+    HomepageComponent,
+    BattleComponent
   ],
   imports: [
     BrowserModule,

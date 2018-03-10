@@ -1,0 +1,9 @@
+a {
+  margin-right:10px;
+  text-decoration: none;
+  color: #ccc;
+}
+
+a.active{
+  color:#ffffff;
+}
