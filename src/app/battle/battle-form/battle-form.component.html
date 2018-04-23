@@ -1,0 +1,15 @@
+<div>
+<form class="battle-form" [formGroup]="battleForm" (submit)=submit()>
+  <mat-form-field class="example-full-width">
+    <input class="form-control" formControlName="movie1" matInput placeholder="Enter IMDB ID for movie 1">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+      <input class="form-control" formControlName="movie2" matInput placeholder="Enter IMDB ID for movie 2">
+  </mat-form-field>
+  <div>
+  <button type="submit">Submit</button>
+    </div>
+</form>
+
+</div>

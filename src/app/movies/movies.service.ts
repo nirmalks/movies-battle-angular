@@ -13,4 +13,9 @@ export class MoviesService {
   fetchMovies() {
     return this.http.get(this.url).map((response: any) => response);
   }
+
+  fetchMovieById(movieName) {
+    return this.http.get(`https://api.themoviedb.org/3/find/${movieName}?api_key=${apiKey}&external_source=imdb_id`)
+    .map((response: any) => response);
+  }
 }
