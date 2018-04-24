@@ -6,6 +6,26 @@ div {
 }
 
 .movie-poster {
-  max-height:400px;
-  max-width: 345px;
+  height:500px;
+}
+
+.movie-card {
+  max-width: 500px;
+  margin-right: 20px;
+  width:40%;
+  max-width: 40%;
+}
+
+.center-text {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.movies-list {
+  flex-wrap: wrap;
+}
+
+.action-button {
+  margin: 5px;
 }

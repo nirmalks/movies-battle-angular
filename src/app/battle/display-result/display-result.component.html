@@ -1,9 +1,6 @@
-
-<div>
+<div #resultContainer>
   <div class="movies-list" fxFlexAlign="center" fxLayoutGap="10px" fxLayout="row" fxLayout.xs="column">
-
     <mat-card  class="movie-card"  *ngFor="let movie of moviesResult">
-
       <mat-card-header class="center-text">
         <mat-card-title fxFlexAlign="center">{{movie.title}}</mat-card-title>
       </mat-card-header>
