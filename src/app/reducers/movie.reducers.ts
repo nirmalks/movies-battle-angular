@@ -7,6 +7,7 @@ export interface MovieState {
     moviesData: Movie[];
     movieForm: Object;
     movieResults: ResultsObj[];
+    result: String;
 }
 
 const initialState: MovieState = {
@@ -21,8 +22,38 @@ const initialState: MovieState = {
     movie1: '',
     movie2: ''
   },
-  movieResults: []
+  movieResults: [],
+  result: ''
 };
+
+function addWinner(movieData) {
+  const newMovieData = movieData;
+  if (movieData !== undefined) {
+    if (movieData[0].movie_results[0].vote_average > movieData[1].movie_results[0].vote_average) {
+      newMovieData[0].movie_results[0].winner = true;
+      newMovieData[1].movie_results[0].winner = false;
+    } else if (movieData[0].movie_results[0].vote_average < movieData[1].movie_results[0].vote_average) {
+      newMovieData[1].movie_results[0].winner = true;
+      newMovieData[0].movie_results[0].winner = false;
+    } else {
+      newMovieData[1].movie_results[0].winner = false;
+      newMovieData[0].movie_results[0].winner = false;
+    }
+  }
+  return newMovieData;
+}
+
+function calculateResult(movie1Result , movie2Result) {
+  let result = '';
+  if (movie1Result) {
+    result = 'Movie1';
+  } else if (movie2Result) {
+    result = 'Movie2';
+  } else {
+    result = 'Tie';
+  }
+  return result;
+}
 
 export function MoviesReducer(state = initialState , action: fromMovies.MovieActions): MovieState {
   switch (action.type) {
@@ -31,7 +62,8 @@ export function MoviesReducer(state = initialState , action: fromMovies.MovieAct
           movies : action.payload,
           moviesData : action.payload.results,
           movieForm: state.movieForm,
-          movieResults: state.movieResults
+          movieResults: state.movieResults,
+          result: state.result
       };
     }
 
@@ -40,15 +72,21 @@ export function MoviesReducer(state = initialState , action: fromMovies.MovieAct
           movies : state.movies,
           moviesData : state.moviesData,
           movieForm: action.payload,
-          movieResults: state.movieResults
+          movieResults: state.movieResults,
+          result: state.result
       };
     }
     case fromMovies.LOAD_MOVIES_BY_ID_SUCCESS: {
+      // const winner = calculateWinner(action.payload[0].movie_results , action.payload[1].movie_results);
+      const modifiedPayload = addWinner(action.payload);
+      const result = calculateResult(modifiedPayload[0].movie_results[0].winner
+        , modifiedPayload[1].movie_results[0].winner);
       return state = {
           movies : state.movies,
           moviesData : state.moviesData,
           movieForm: state.movieForm,
-          movieResults: action.payload
+          movieResults: modifiedPayload,
+          result: result
       };
     }
     default: {

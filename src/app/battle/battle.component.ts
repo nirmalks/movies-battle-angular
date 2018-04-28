@@ -50,8 +50,13 @@ private displayResultComponent: DisplayResultComponent;
         this.dumRes.push(movie.movie_results[0]);
       });
       this.displayResultComponent.moviesResult = this.dumRes;
+    });
+
+    this.store.pipe(select(state => state.movies.result)).subscribe((data: any) => {
+      this.displayResultComponent.result = data;
       this.displayResultComponent.populatePage();
     });
+
   }
 
   submitted(movie: any) {

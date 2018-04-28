@@ -1,4 +1,6 @@
 import { Component, OnInit , Renderer2, ChangeDetectionStrategy , ChangeDetectorRef , Input , Output } from '@angular/core';
+import { MatIconRegistry } from '@angular/material';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-display-result',
@@ -8,7 +10,9 @@ import { Component, OnInit , Renderer2, ChangeDetectionStrategy , ChangeDetector
 })
 export class DisplayResultComponent implements OnInit {
   moviesResult: any;
-  constructor(private ref: ChangeDetectorRef) {
+  result: String;
+  constructor(private ref: ChangeDetectorRef , iconRegistry: MatIconRegistry , sanitizer: DomSanitizer) {
+
   }
 
   ngOnInit() {

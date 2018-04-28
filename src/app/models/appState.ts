@@ -5,5 +5,5 @@ export interface AppState {
 }
 
 export interface ResultState {
-  movies: { movieResults: ResultsObj[] };
+  movies: { movieResults: ResultsObj[] , result: String };
 }
