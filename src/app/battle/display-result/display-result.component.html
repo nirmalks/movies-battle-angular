@@ -1,17 +1,18 @@
 <div>
-  <ng-container *ngIf="result">
-    <h3 *ngIf="result == 'Tie';else elseBlock">Its a Tie</h3>
+  <ng-container *ngIf="winner">
+    <h3 *ngIf="result === 'Tie';else elseBlock">Its a Tie</h3>
     <ng-template #elseBlock>
-        <h3>The winner is {{result}}</h3>
-      </ng-template>
+      <h3>The winner is {{winner}}</h3>
+    </ng-template>
   </ng-container>
 
 </div>
 <div>
   <div class="movies-list" fxFlexAlign="center" fxLayoutGap="10px" fxLayout="row" fxLayout.xs="column">
-    <mat-card  class="movie-card"  *ngFor="let movie of moviesResult">
+    <mat-card #moviecard class="movie-card" *ngFor="let movie of moviesResult">
       <mat-card-header class="center-text">
-        <mat-card-title fxFlexAlign="center"><mat-icon *ngIf="movie.winner == true">thumb_up</mat-icon>{{movie.title}}</mat-card-title>
+        <mat-card-title fxFlexAlign="center">
+          <mat-icon *ngIf="movie.winner == true">thumb_up</mat-icon>{{movie.title}}</mat-card-title>
       </mat-card-header>
       <img class="movie-poster" mat-card-image src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" alt="{{movie.title}}">
       <mat-card-content fxFlexAlign="center">
@@ -20,10 +21,10 @@
         </p>
       </mat-card-content>
       <mat-card-actions>
-          <span  class="center-text">
-        <button class="action-button" mat-button>LIKE</button>
-        <button class="action-button" mat-button>SHARE</button>
-      </span>
+        <span class="center-text">
+          <button class="action-button" mat-button>LIKE</button>
+          <button class="action-button" mat-button>SHARE</button>
+        </span>
       </mat-card-actions>
     </mat-card>
   </div>

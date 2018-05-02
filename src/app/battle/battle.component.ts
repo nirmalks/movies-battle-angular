@@ -16,6 +16,7 @@ import {  ChangeDetectorRef } from '@angular/core';
 import { DisplayResultComponent } from './display-result/display-result.component';
 import { ViewChild } from '@angular/core';
 import { AfterViewInit } from '@angular/core';
+import { OnChanges } from '@angular/core/src/metadata/lifecycle_hooks';
 @Component({
   selector: 'app-battle',
   templateUrl: './battle.component.html',
@@ -27,11 +28,10 @@ export class BattleComponent implements OnInit  {
 
   }
 
-  @ViewChild(DisplayResultComponent)
-private displayResultComponent: DisplayResultComponent;
   formSuccess: Subscription;
   moviesResult: Observable<any>;
-  dumRes: any = [];
+  movieResultArray: any = [];
+  winner: String = '';
   ngOnInit() {
     this.formSuccess = this.actionsSubject.asObservable().pipe(
       filter(action => {
@@ -46,17 +46,16 @@ private displayResultComponent: DisplayResultComponent;
   getResults() {
     this.store.pipe(select(state => state.movies.movieResults)).subscribe((data: any) => {
       this.moviesResult = data;
+      this.movieResultArray = [];
       data.forEach((movie: any) => {
-        this.dumRes.push(movie.movie_results[0]);
+        this.movieResultArray.push(movie.movie_results[0]);
       });
-      this.displayResultComponent.moviesResult = this.dumRes;
     });
 
     this.store.pipe(select(state => state.movies.result)).subscribe((data: any) => {
-      this.displayResultComponent.result = data;
-      this.displayResultComponent.populatePage();
+      this.winner = data;
     });
-
+    this.ref.detectChanges();
   }
 
   submitted(movie: any) {
