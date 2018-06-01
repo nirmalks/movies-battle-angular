@@ -59,32 +59,24 @@ export function MoviesReducer(state = initialState , action: fromMovies.MovieAct
   switch (action.type) {
     case fromMovies.LOAD_MOVIES_SUCCESS: {
       return state = {
+          ...state,
           movies : action.payload,
           moviesData : action.payload.results,
-          movieForm: state.movieForm,
-          movieResults: state.movieResults,
-          result: state.result
       };
     }
 
     case fromMovies.UPDATE_FORM: {
       return state = {
-          movies : state.movies,
-          moviesData : state.moviesData,
+          ...state,
           movieForm: action.payload,
-          movieResults: state.movieResults,
-          result: state.result
       };
     }
     case fromMovies.LOAD_MOVIES_BY_ID_SUCCESS: {
-      // const winner = calculateWinner(action.payload[0].movie_results , action.payload[1].movie_results);
       const modifiedPayload = addWinner(action.payload);
       const result = calculateResult(modifiedPayload[0].movie_results[0].winner
         , modifiedPayload[1].movie_results[0].winner);
       return state = {
-          movies : state.movies,
-          moviesData : state.moviesData,
-          movieForm: state.movieForm,
+          ...state,
           movieResults: modifiedPayload,
           result: result
       };
