@@ -1,6 +1,7 @@
 import * as fromMovies from './../actions/movies.actions';
 import {Movie , MovieObj, MovieData, ResultsObj, MovieResult} from '../models/movie';
 import { ResultState } from '../models/appState';
+import { MoviesState } from './index';
 
 export interface MovieState {
     movies: MovieObj;
@@ -86,3 +87,6 @@ export function MoviesReducer(state = initialState , action: fromMovies.MovieAct
     }
   }
 }
+
+export const getTotalMovies = (state: MoviesState) => state.movies.movieResults;
+export const getWinnerResult = (state) => state.movies.result;

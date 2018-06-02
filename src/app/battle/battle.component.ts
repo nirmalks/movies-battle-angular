@@ -3,20 +3,17 @@ import { EventEmitter } from '@angular/core';
 import { filter } from 'rxjs/operators/filter';
 import * as movieActions from '../actions/movies.actions';
 import { Subscription } from 'rxjs/Subscription';
-import { select } from '@ngrx/store';
 import { Actions } from '@ngrx/effects';
-import { MovieResult, ResultsObj, Movie } from '../models/movie';
-import { Store } from '@ngrx/store';
-import { ActionsSubject } from '@ngrx/store';
+import { Store , ActionsSubject , select} from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
+import { Output , ViewChild , AfterViewInit , ChangeDetectionStrategy ,
+  ChangeDetectorRef , OnChanges  } from '@angular/core';
+
+import { MovieResult, ResultsObj, Movie } from '../models/movie';
 import { ResultState } from '../models/appState';
-import {  Output } from '@angular/core';
-import { ChangeDetectionStrategy } from '@angular/core';
-import {  ChangeDetectorRef } from '@angular/core';
 import { DisplayResultComponent } from './display-result/display-result.component';
-import { ViewChild } from '@angular/core';
-import { AfterViewInit } from '@angular/core';
-import { OnChanges } from '@angular/core/src/metadata/lifecycle_hooks';
+import * as fromStore from '../reducers/movie.reducers';
+
 @Component({
   selector: 'app-battle',
   templateUrl: './battle.component.html',
@@ -44,7 +41,7 @@ export class BattleComponent implements OnInit  {
   }
 
   getResults() {
-    this.store.pipe(select(state => state.movies.movieResults)).subscribe((data: any) => {
+    this.store.pipe(select(fromStore.getTotalMovies)).subscribe((data: any) => {
       this.moviesResult = data;
       this.movieResultArray = [];
       data.forEach((movie: any) => {
@@ -52,7 +49,7 @@ export class BattleComponent implements OnInit  {
       });
     });
 
-    this.store.pipe(select(state => state.movies.result)).subscribe((data: any) => {
+    this.store.pipe(select(fromStore.getWinnerResult)).subscribe((data: any) => {
       this.winner = data;
     });
     this.ref.detectChanges();
